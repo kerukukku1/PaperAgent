@@ -12,6 +12,7 @@ class MainTabBarController: UITabBarController {
 
     var homeView : HomeViewController!
     var searchView : SearchViewController!
+    var downloadView : DownloadViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +20,12 @@ class MainTabBarController: UITabBarController {
         // Do any additional setup after loading the view.
         homeView = HomeViewController()
         searchView = SearchViewController()
+        downloadView = DownloadViewController()
         homeView.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.recents, tag: 1)
-        searchView.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.downloads, tag: 2)
+        searchView.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.search, tag: 2)
+        downloadView.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.downloads, tag: 3)
         
-        let myTabs : [UIViewController]? = [homeView!, searchView!]
+        let myTabs : [UIViewController]? = [homeView!, searchView!, downloadView!]
         
         self.setViewControllers(myTabs, animated: false)
     }

@@ -14,7 +14,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.brown
+        let container = UIView()
+        container.backgroundColor = UIColor.brown
+        let button = UIButton(type: .system)
+        button.setTitle("Request", for: .normal)
+        button.tintColor = UIColor.white
+        button.backgroundColor = UIColor.darkGray
+        button.addTarget(self, action: #selector(onTappedButton(_:)), for: .touchUpInside)
+        button.layer.masksToBounds = true
+        button.frame = CGRect(x: self.view.frame.width/2, y: self.view.frame.height/2, width: 200, height: 50)
+        self.view.addSubview(button)
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +31,12 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func onTappedButton(_ sender : UIButton){
+        print(sender)
+        let path = "https://www.google.co.jp/"
+        let reqSite : RequestHTTPS = RequestHTTPS()
+        reqSite.getAsync(url: path)
+    }
 
     /*
     // MARK: - Navigation
