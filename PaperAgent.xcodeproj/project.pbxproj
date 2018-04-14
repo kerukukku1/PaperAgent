@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3946748F2081B70000D064F0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3946748E2081B70000D064F0 /* MainTabBarController.swift */; };
+		394674942081B8A900D064F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394674932081B8A900D064F0 /* HomeViewController.swift */; };
 		39A0D151207F6B26005F264B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D150207F6B26005F264B /* AppDelegate.swift */; };
-		39A0D153207F6B26005F264B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D152207F6B26005F264B /* ViewController.swift */; };
 		39A0D158207F6B26005F264B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39A0D157207F6B26005F264B /* Assets.xcassets */; };
 		39A0D15B207F6B26005F264B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A0D159207F6B26005F264B /* LaunchScreen.storyboard */; };
 		39A0D166207F6B26005F264B /* PaperAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D165207F6B26005F264B /* PaperAgentTests.swift */; };
 		39A0D171207F6B26005F264B /* PaperAgentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D170207F6B26005F264B /* PaperAgentUITests.swift */; };
-		39A0D17F207F6B82005F264B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D17E207F6B82005F264B /* MainView.swift */; };
+		39A0D181207F78A1005F264B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D180207F78A1005F264B /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3946748E2081B70000D064F0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		394674932081B8A900D064F0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		39A0D14D207F6B26005F264B /* PaperAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A0D150207F6B26005F264B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		39A0D152207F6B26005F264B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		39A0D157207F6B26005F264B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39A0D15A207F6B26005F264B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39A0D15C207F6B26005F264B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,7 +48,7 @@
 		39A0D16C207F6B26005F264B /* PaperAgentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaperAgentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A0D170207F6B26005F264B /* PaperAgentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperAgentUITests.swift; sourceTree = "<group>"; };
 		39A0D172207F6B26005F264B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		39A0D17E207F6B82005F264B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		39A0D180207F78A1005F264B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3946748D2081B6DC00D064F0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3946748E2081B70000D064F0 /* MainTabBarController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		394674902081B87800D064F0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				394674932081B8A900D064F0 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		39A0D144207F6B26005F264B = {
 			isa = PBXGroup;
 			children = (
@@ -97,9 +115,10 @@
 		39A0D14F207F6B26005F264B /* PaperAgent */ = {
 			isa = PBXGroup;
 			children = (
-				39A0D17E207F6B82005F264B /* MainView.swift */,
+				394674902081B87800D064F0 /* Home */,
+				3946748D2081B6DC00D064F0 /* Main */,
+				39A0D183207F80E6005F264B /* Search */,
 				39A0D150207F6B26005F264B /* AppDelegate.swift */,
-				39A0D152207F6B26005F264B /* ViewController.swift */,
 				39A0D157207F6B26005F264B /* Assets.xcassets */,
 				39A0D159207F6B26005F264B /* LaunchScreen.storyboard */,
 				39A0D15C207F6B26005F264B /* Info.plist */,
@@ -123,6 +142,14 @@
 				39A0D172207F6B26005F264B /* Info.plist */,
 			);
 			path = PaperAgentUITests;
+			sourceTree = "<group>";
+		};
+		39A0D183207F80E6005F264B /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				39A0D180207F78A1005F264B /* SearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +285,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39A0D153207F6B26005F264B /* ViewController.swift in Sources */,
-				39A0D17F207F6B82005F264B /* MainView.swift in Sources */,
+				39A0D181207F78A1005F264B /* SearchViewController.swift in Sources */,
+				3946748F2081B70000D064F0 /* MainTabBarController.swift in Sources */,
 				39A0D151207F6B26005F264B /* AppDelegate.swift in Sources */,
+				394674942081B8A900D064F0 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
