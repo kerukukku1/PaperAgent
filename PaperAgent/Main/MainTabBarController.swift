@@ -21,11 +21,19 @@ class MainTabBarController: UITabBarController {
         homeView = HomeViewController()
         searchView = SearchViewController()
         downloadView = DownloadViewController()
+        
+        homeView.navigationItem.title = "Home"
+        searchView.navigationItem.title = "Search"
+        downloadView.navigationItem.title = "Download"
         homeView.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.recents, tag: 1)
         searchView.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.search, tag: 2)
         downloadView.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.downloads, tag: 3)
         
-        let myTabs : [UIViewController]? = [homeView!, searchView!, downloadView!]
+        let navController1 = UINavigationController(rootViewController: homeView)
+        let navController2 = UINavigationController(rootViewController: searchView)
+        let navController3 = UINavigationController(rootViewController: downloadView)
+        
+        let myTabs : [UIViewController] = [navController1, navController2, navController3]
         
         self.setViewControllers(myTabs, animated: false)
     }

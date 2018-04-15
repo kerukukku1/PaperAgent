@@ -21,10 +21,12 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
     private var selectFlag = Array<Bool>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         for _ in 0..<items.count{
             selectFlag.append(true)
         }
+
+
         // Status Barの高さを取得する.
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         
