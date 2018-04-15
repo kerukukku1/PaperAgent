@@ -12,7 +12,7 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
 
     private var myTableView: UITableView!
     private let items = [
-        (title: "最近使用した項目", contents: ["Digital Wing", "Amanerio", "Beat Mario", ]),
+        (title: "最近使用した項目", contents: ["Digital Wing", "Amanerio", "Beat Mario"]),
         (title: "ダウンロードした項目", contents: ["Digital Wing", "Tama on the set", "Buta otome", "Beat Mario", "Amanerio"]),
         (title: "お気に入り", contents: ["Kernel", "divergence", "robust", "sparse"]),
         (title: "全ての論文", contents: ["Testaaaaaaaaaaaああああああああああああああああああああああああああああああああああああああああああ", "Test2" ]),
@@ -44,7 +44,7 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         //罫線の削除
 //        myTableView.separatorColor = UIColor.clear
         
-        myTableView.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.white
         
         // DataSourceを自身に設定する.
         myTableView.dataSource = self
