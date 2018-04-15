@@ -9,23 +9,47 @@
 import UIKit
 
 class DownloadViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    private let dlContents : NSArray = ["Robust","Sparse","Kernel"]
-    private var dlTable : UITableView!
+
+    private var myTableView: UITableView!
+    private let items = [
+        (title: "最近使用した項目", contents: ["Digital Wing", "Amanerio", "Beat Mario", ]),
+        (title: "ダウンロードした項目", contents: ["Digital Wing", "Tama on the set", "Buta otome", "Beat Mario", "Amanerio"]),
+        (title: "お気に入り", contents: ["Kernel", "divergence", "robust", "sparse"]),
+        (title: "全ての論文", contents: ["Test", "Test2" ]),
+        ]
     
+    private var selectFlag = Array<Bool>()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        let barHeight : CGFloat = UIApplication.shared.statusBarFrame.size.height
+        for _ in 0..<items.count{
+            selectFlag.append(true)
+        }
+        // Status Barの高さを取得する.
+        let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         
-        let displayWidth : CGFloat = self.view.frame.width
-        let displayHeight : CGFloat = self.view.frame.height
+        // Viewの高さと幅を取得する.
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+       
+        // TableViewの生成(Status barの高さをずらして表示).
+        myTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight))
         
-        dlTable = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight))
-        dlTable.register(UITableViewCell.self, forCellReuseIdentifier: "myCell")
-        dlTable.dataSource = self
-        dlTable.delegate = self
-        self.view.addSubview(dlTable)
+        // Cell名の登録をおこなう.
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        
+        //罫線の削除
+//        myTableView.separatorColor = UIColor.clear
+        
+        // DataSourceを自身に設定する.
+        myTableView.dataSource = self
+        
+        // Delegateを自身に設定する.
+        myTableView.delegate = self
+        
+        // Viewに追加する.
+        self.view.addSubview(myTableView)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,31 +57,67 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    //セクションのタイトルを返す
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return items[section].title as? String
+    }
     
     /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
+     Cellが選択された際に呼び出される
      */
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Num: \(indexPath.row)")
-        print("Value: \(dlContents[indexPath.row])")
+        print(items[indexPath.section].title)
+        print(items[indexPath.section].contents[indexPath.row])
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return items.count
+    }
+    
+    /*
+     Cellの総数を返す.
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dlContents.count
+        return selectFlag[section] ? 0 : items[section].contents.count
     }
     
+    /*
+     Cellに値を設定する
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath as IndexPath)
-        cell.textLabel!.text = "\(dlContents[indexPath.row])"
+        // 再利用するCellを取得する.
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+//        Cellに値を設定する.
+        cell.textLabel!.text = items[indexPath.section].contents[indexPath.row]
+        
         return cell
     }
     
+    //テーブルのメイン設定
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionView : UIView = UIView()
+        let label : UILabel = UILabel()
+        for key in items[section].contents {
+            label.text = key
+        }
+        label.textColor = UIColor.blue
+        label.font = UIFont(name: "Arial", size: 40)
+        label.sizeToFit()
+        sectionView.addSubview(label)
+        sectionView.backgroundColor = UIColor.white
+        
+        sectionView.tag = section
+        sectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapHeader(gestureRecognizer:))))
+        
+        return sectionView
+    }
     
+    @objc func tapHeader(gestureRecognizer : UITapGestureRecognizer){
+        guard let section = gestureRecognizer.view?.tag as Int! else{
+            return
+        }
+        self.selectFlag[section] = !self.selectFlag[section]
+        self.myTableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .none)
+    }
 }
 
