@@ -15,7 +15,7 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         (title: "最近使用した項目", contents: ["Digital Wing", "Amanerio", "Beat Mario", ]),
         (title: "ダウンロードした項目", contents: ["Digital Wing", "Tama on the set", "Buta otome", "Beat Mario", "Amanerio"]),
         (title: "お気に入り", contents: ["Kernel", "divergence", "robust", "sparse"]),
-        (title: "全ての論文", contents: ["Test", "Test2" ]),
+        (title: "全ての論文", contents: ["Testaaaaaaaaaaaああああああああああああああああああああああああああああああああああああああああああ", "Test2" ]),
         ]
     
     private var selectFlag = Array<Bool>()
@@ -28,12 +28,15 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         // Status Barの高さを取得する.
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         
+        // TabBarの高さを取得する
+        let tabBarHeight : CGFloat = (tabBarController?.tabBar.frame.size.height)!
+        
         // Viewの高さと幅を取得する.
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
        
         // TableViewの生成(Status barの高さをずらして表示).
-        myTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight))
+        myTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - tabBarHeight))
         
         // Cell名の登録をおこなう.
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
@@ -46,6 +49,11 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Delegateを自身に設定する.
         myTableView.delegate = self
+        
+        myTableView.estimatedRowHeight = 50
+        myTableView.estimatedSectionHeaderHeight = 50
+        myTableView.rowHeight = UITableViewAutomaticDimension
+        myTableView.sectionHeaderHeight = UITableViewAutomaticDimension
         
         // Viewに追加する.
         self.view.addSubview(myTableView)
@@ -88,7 +96,7 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         // 再利用するCellを取得する.
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
 //        Cellに値を設定する.
-        cell.textLabel!.text = items[indexPath.section].contents[indexPath.row]
+        cell.textLabel?.text = items[indexPath.section].contents[indexPath.row]
         
         return cell
     }
@@ -97,11 +105,9 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionView : UIView = UIView()
         let label : UILabel = UILabel()
-        for key in items[section].contents {
-            label.text = key
-        }
+        label.text = items[section].title
         label.textColor = UIColor.blue
-        label.font = UIFont(name: "Arial", size: 40)
+        label.font = UIFont(name: "Arial", size: 30)
         label.sizeToFit()
         sectionView.addSubview(label)
         sectionView.backgroundColor = UIColor.white
@@ -111,6 +117,7 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         
         return sectionView
     }
+
     
     @objc func tapHeader(gestureRecognizer : UITapGestureRecognizer){
         guard let section = gestureRecognizer.view?.tag as Int! else{
