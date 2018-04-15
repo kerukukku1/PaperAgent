@@ -44,6 +44,8 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         //罫線の削除
 //        myTableView.separatorColor = UIColor.clear
         
+        myTableView.backgroundColor = UIColor.white
+        
         // DataSourceを自身に設定する.
         myTableView.dataSource = self
         
