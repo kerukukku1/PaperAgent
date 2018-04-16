@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NextViewController: UIViewController {
-
+class NextViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     let navTitle : String
+    var showCase : UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,16 @@ class NextViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.title = navTitle
         self.view.backgroundColor = UIColor.white
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: self.view.bounds.width/3 - 8, height: self.view.bounds.width/3)
+        layout.sectionInset = UIEdgeInsetsMake(2, 0, 2, 0)
+        layout.headerReferenceSize = CGSize(width: 0, height: 0)
+        showCase = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        showCase.register(FileCollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
+        showCase.delegate = self
+        showCase.dataSource = self
+        self.view.addSubview(showCase)
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,5 +54,16 @@ class NextViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 55 /*tmp test size*/
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell : FileCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! FileCollectionViewCell
+        cell.textLabel?.text = indexPath.row.description
+        return cell
+    }
+    
 
 }
