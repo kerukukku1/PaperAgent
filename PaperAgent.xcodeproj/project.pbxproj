@@ -17,6 +17,7 @@
 		39A0D166207F6B26005F264B /* PaperAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D165207F6B26005F264B /* PaperAgentTests.swift */; };
 		39A0D171207F6B26005F264B /* PaperAgentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D170207F6B26005F264B /* PaperAgentUITests.swift */; };
 		39A0D181207F78A1005F264B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D180207F78A1005F264B /* SearchViewController.swift */; };
+		39D4DEC620842BF40000720C /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4DEC520842BF40000720C /* NextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		39A0D170207F6B26005F264B /* PaperAgentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperAgentUITests.swift; sourceTree = "<group>"; };
 		39A0D172207F6B26005F264B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A0D180207F78A1005F264B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		39D4DEC520842BF40000720C /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				394674962081BB7800D064F0 /* DownloadViewController.swift */,
+				39D4DEC520842BF40000720C /* NextViewController.swift */,
 			);
 			path = Download;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39A0D181207F78A1005F264B /* SearchViewController.swift in Sources */,
+				39D4DEC620842BF40000720C /* NextViewController.swift in Sources */,
 				3946749A2081C71300D064F0 /* RequestHTTPS.swift in Sources */,
 				3946748F2081B70000D064F0 /* MainTabBarController.swift in Sources */,
 				39A0D151207F6B26005F264B /* AppDelegate.swift in Sources */,

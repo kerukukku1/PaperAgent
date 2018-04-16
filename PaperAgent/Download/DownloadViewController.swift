@@ -17,7 +17,6 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         (title: "お気に入り", contents: ["Kernel", "divergence", "robust", "sparse"]),
         (title: "全ての論文", contents: ["Testaaaaaaaaaaaああああああああああああああああああああああああああああああああああああああああああ", "Test2" ]),
         ]
-    
     private var selectFlag = Array<Bool>()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,10 +79,19 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(items[indexPath.section].title)
         print(items[indexPath.section].contents[indexPath.row])
+        let nextView = NextViewController(title:items[indexPath.section].contents[indexPath.row])
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return items.count
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let a = myTableView.indexPathForSelectedRow {
+            myTableView.deselectRow(at: a, animated: true)
+        }
     }
     
     /*
@@ -121,7 +129,6 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         
         return sectionView
     }
-
     
     @objc func tapHeader(gestureRecognizer : UITapGestureRecognizer){
         guard let section = gestureRecognizer.view?.tag as Int! else{
