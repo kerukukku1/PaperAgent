@@ -8,9 +8,13 @@
 
 import UIKit
 
-class NextViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class NextViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource ,UISearchResultsUpdating {
     let navTitle : String
     var showCase : UICollectionView!
+    var searchRes:[String] = []
+    let data:[String] = ["mato","genkyu","leo","rintao","mahito","hokekyo","freedom","huwaa","yukihiko","tom"]
+    
+    var searchController : UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +32,14 @@ class NextViewController: UIViewController, UICollectionViewDelegate, UICollecti
         showCase.delegate = self
         showCase.dataSource = self
         self.view.addSubview(showCase)
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.sizeToFit()
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = "検索"
+        showCase.addSubview(searchController.searchBar)
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,13 +68,22 @@ class NextViewController: UIViewController, UICollectionViewDelegate, UICollecti
     */
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 55 /*tmp test size*/
+        return (searchController.isActive) ? searchRes.count : data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : FileCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! FileCollectionViewCell
-        cell.textLabel?.text = indexPath.row.description
+        if searchController.isActive {
+            cell.textLabel!.text = "\(searchRes[indexPath.row])"
+        } else {
+            cell.textLabel?.text = data[indexPath.row]
+        }
         return cell
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        self.searchRes = data.filter({ $0.lowercased().contains(searchController.searchBar.text!.lowercased())})
+        self.showCase.reloadData()
     }
     
 
