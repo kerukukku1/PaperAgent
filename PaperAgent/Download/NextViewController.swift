@@ -23,22 +23,23 @@ class NextViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.navigationItem.title = navTitle
         self.view.backgroundColor = UIColor.white
         
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.view.bounds.width/3 - 8, height: self.view.bounds.width/3)
-        layout.sectionInset = UIEdgeInsetsMake(2, 0, 2, 0)
-        layout.headerReferenceSize = CGSize(width: 0, height: 0)
-        showCase = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        showCase.register(FileCollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
-        showCase.delegate = self
-        showCase.dataSource = self
-        self.view.addSubview(showCase)
-        
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "検索"
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: self.view.bounds.width/3 - 8, height: self.view.bounds.width/3)
+//        layout.sectionInset = UIEdgeInsetsMake(2, 0, 2, 0)
+        layout.headerReferenceSize = CGSize(width: searchController.searchBar.bounds.width, height: searchController.searchBar.bounds.height)
+        showCase = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        showCase.register(FileCollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
+        showCase.delegate = self
+        showCase.dataSource = self
+        showCase.backgroundColor = UIColor.lightGray
+        self.view.addSubview(showCase)
         showCase.addSubview(searchController.searchBar)
     }
 
