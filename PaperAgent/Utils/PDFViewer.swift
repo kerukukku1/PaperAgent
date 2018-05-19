@@ -13,6 +13,7 @@ class PDFViewer: UIViewController{
     let wkWebView = WKWebView()
     var backButton: UIButton!
     var forwadButton: UIButton!
+    var progressView = UIProgressView()
     var targetUrl = "https://google.co.jp/"
     
     func setTargetURL(path: String){
@@ -27,6 +28,14 @@ class PDFViewer: UIViewController{
         wkWebView.navigationDelegate = self
         wkWebView.uiDelegate = self
         
+        self.progressView = UIProgressView(frame: CGRect(x: 0.0, y: (self.navigationController?.navigationBar.frame.size.height)! - 3.0, width: self.view.frame.size.width, height: 3.0))
+        self.progressView.progressViewStyle = .bar
+        self.navigationController?.navigationBar.addSubview(self.progressView)
+        
+        // KVO 監視
+        self.wkWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        self.wkWebView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
+        
         // スワイプでの「戻る・すすむ」を有効にする
         wkWebView.allowsBackForwardNavigationGestures = true
         
@@ -38,6 +47,32 @@ class PDFViewer: UIViewController{
         
     }
     
+    deinit {
+        self.wkWebView.removeObserver(self, forKeyPath: "estimatedProgress", context: nil)
+        self.wkWebView.removeObserver(self, forKeyPath: "loading", context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if (keyPath == "estimatedProgress") {
+            // alphaを1にする(表示)
+            self.progressView.alpha = 1.0
+            // estimatedProgressが変更されたときにプログレスバーの値を変更
+            self.progressView.setProgress(Float(self.wkWebView.estimatedProgress), animated: true)
+            
+            // estimatedProgressが1.0になったらアニメーションを使って非表示にしアニメーション完了時0.0をセットする
+            if (self.wkWebView.estimatedProgress >= 1.0) {
+                UIView.animate(withDuration: 0.3,
+                               delay: 0.3,
+                               options: [.curveEaseOut],
+                               animations: { [weak self] in
+                                self?.progressView.alpha = 0.0
+                    }, completion: {
+                        (finished : Bool) in
+                        self.progressView.setProgress(0.0, animated: false)
+                })
+            }
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
