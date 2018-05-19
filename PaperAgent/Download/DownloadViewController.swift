@@ -13,7 +13,7 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
     private var myTableView: UITableView!
     private let items = [
         (title: "最近使用した項目", contents: ["Digital Wing", "Amanerio", "Beat Mario"]),
-        (title: "ダウンロードした項目", contents: ["Digital Wing", "Tama on the set", "Buta otome", "Beat Mario", "Amanerio"]),
+        (title: "ダウンロードした項目", contents: ["Digital Wing", "Tama on the set", "Buta otome", "Say Yeah Yeah", "KATSU"]),
         (title: "お気に入り", contents: ["Kernel", "divergence", "robust", "sparse"]),
         (title: "全ての論文", contents: ["Testaaaaaaaaaaaああああああああああああああああああああああああああああああああああああああああああ", "Test2" ]),
         ]
@@ -24,7 +24,6 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         for _ in 0..<items.count{
             selectFlag.append(true)
         }
-
 
         // Status Barの高さを取得する.
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height

@@ -20,12 +20,12 @@ class FileCollectionViewCell: UICollectionViewCell {
         
         // UILabelを生成.
         textLabel = UILabel(frame: CGRect(x:0, y:0, width:frame.width, height:frame.height))
-        textLabel?.text = "nil"
         textLabel?.backgroundColor = UIColor.white
+        textLabel?.layer.borderColor = UIColor.black.cgColor
+        textLabel?.layer.borderWidth = 1
         textLabel?.textAlignment = NSTextAlignment.center
         
         // Cellに追加.
         self.contentView.addSubview(textLabel!)
     }
-
 }
