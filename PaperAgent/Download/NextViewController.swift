@@ -12,7 +12,7 @@ class NextViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let navTitle : String
     var showCase : UICollectionView!
     var searchRes:[String] = []
-    let data:[String] = ["mato","genkyu","leo","rintao","mahito","hokekyo","freedom","huwaa","yukihiko","tom"]
+    let data:[String] = ["mato","genkyu","leo","rintao","mahito","hokekyo","freedom","huwaa","yukihiko","tom", "google"]
     
     var searchController : UISearchController!
     
@@ -50,14 +50,24 @@ class NextViewController: UIViewController, UICollectionViewDelegate, UICollecti
         showCase.delegate = self
         showCase.dataSource = self
         showCase.backgroundColor = UIColor.white
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.checkAction))
-        self.showCase.addGestureRecognizer(gesture)
+//        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.checkAction))
+//        self.showCase.addGestureRecognizer(gesture)
         self.view.addSubview(showCase)
         showCase.addSubview(searchController.searchBar)
     }
     
-    @objc func checkAction(sender : UITapGestureRecognizer){
-        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let tappedCell = collectionView.cellForItem(at: indexPath) as! FileCollectionViewCell
+//        let resultIndex = indexPath.row % 4
+//        tappedCell.textLabel?.backgroundColor = UIColor.red
+        let tappedCell = collectionView.cellForItem(at: indexPath) as! FileCollectionViewCell
+        tappedCell.textLabel?.backgroundColor = UIColor.green
+        print(data[indexPath.row])
+        if(data[indexPath.row] == "google"){
+            let vc = PDFViewer()
+            vc.setTargetURL(path: "https://qiita.com/edo_m18/items/189acd18f1ecc368b5b0")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
