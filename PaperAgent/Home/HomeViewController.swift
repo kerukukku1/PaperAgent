@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
         print(sender)
         let path = "https://www.google.co.jp/"
         let reqSite : RequestHTTPS = RequestHTTPS()
-        reqSite.getAsync(url: path)
+        reqSite.getAsync(downloadURL: path)
     }
 
     /*
