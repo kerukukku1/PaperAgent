@@ -17,6 +17,8 @@
 		39A0D166207F6B26005F264B /* PaperAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D165207F6B26005F264B /* PaperAgentTests.swift */; };
 		39A0D171207F6B26005F264B /* PaperAgentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D170207F6B26005F264B /* PaperAgentUITests.swift */; };
 		39A0D181207F78A1005F264B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D180207F78A1005F264B /* SearchViewController.swift */; };
+		A027F26820B04139008675D2 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027F26720B04139008675D2 /* MyRecord.swift */; };
+		A027F26A20B04145008675D2 /* CustomUICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027F26920B04145008675D2 /* CustomUICollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		39A0D170207F6B26005F264B /* PaperAgentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperAgentUITests.swift; sourceTree = "<group>"; };
 		39A0D172207F6B26005F264B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A0D180207F78A1005F264B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		A027F26720B04139008675D2 /* MyRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
+		A027F26920B04145008675D2 /* CustomUICollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUICollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,8 @@
 		39A0D183207F80E6005F264B /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				A027F26920B04145008675D2 /* CustomUICollectionViewCell.swift */,
+				A027F26720B04139008675D2 /* MyRecord.swift */,
 				39A0D180207F78A1005F264B /* SearchViewController.swift */,
 			);
 			path = Search;
@@ -312,6 +318,8 @@
 				3946748F2081B70000D064F0 /* MainTabBarController.swift in Sources */,
 				39A0D151207F6B26005F264B /* AppDelegate.swift in Sources */,
 				394674972081BB7800D064F0 /* DownloadViewController.swift in Sources */,
+				A027F26820B04139008675D2 /* MyRecord.swift in Sources */,
+				A027F26A20B04145008675D2 /* CustomUICollectionViewCell.swift in Sources */,
 				394674942081B8A900D064F0 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
