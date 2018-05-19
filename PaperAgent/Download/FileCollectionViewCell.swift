@@ -22,7 +22,8 @@ class FileCollectionViewCell: UICollectionViewCell {
         textLabel = UILabel(frame: CGRect(x:0, y:0, width:frame.width, height:frame.height))
         textLabel?.backgroundColor = UIColor.white
         textLabel?.layer.borderColor = UIColor.black.cgColor
-        textLabel?.layer.borderWidth = 1
+        textLabel?.layer.borderWidth = 0.5
+        textLabel?.layer.cornerRadius = 4
         textLabel?.textAlignment = NSTextAlignment.center
         
         // Cellに追加.
