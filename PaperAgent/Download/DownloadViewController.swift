@@ -13,18 +13,18 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
     private var myTableView: UITableView!
     private let items = [
         (title: "最近使用した項目", contents: ["Digital Wing", "Amanerio", "Beat Mario"]),
-        (title: "ダウンロードした項目", contents: ["Digital Wing", "Tama on the set", "Buta otome", "Beat Mario", "Amanerio"]),
+        (title: "ダウンロードした項目", contents: ["Digital Wing", "Tama on the set", "Buta otome", "Say Yeah Yeah", "KATSU"]),
         (title: "お気に入り", contents: ["Kernel", "divergence", "robust", "sparse"]),
         (title: "全ての論文", contents: ["Testaaaaaaaaaaaああああああああああああああああああああああああああああああああああああああああああ", "Test2" ]),
         ]
-    
     private var selectFlag = Array<Bool>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         for _ in 0..<items.count{
             selectFlag.append(true)
         }
+
         // Status Barの高さを取得する.
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         
@@ -78,10 +78,19 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(items[indexPath.section].title)
         print(items[indexPath.section].contents[indexPath.row])
+        let nextView = NextViewController(title:items[indexPath.section].contents[indexPath.row])
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return items.count
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let a = myTableView.indexPathForSelectedRow {
+            myTableView.deselectRow(at: a, animated: true)
+        }
     }
     
     /*
@@ -119,7 +128,6 @@ class DownloadViewController: UIViewController, UITableViewDelegate, UITableView
         
         return sectionView
     }
-
     
     @objc func tapHeader(gestureRecognizer : UITapGestureRecognizer){
         guard let section = gestureRecognizer.view?.tag as Int! else{
