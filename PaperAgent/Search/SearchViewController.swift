@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     
     
 
@@ -61,6 +61,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         myCollectionView.dataSource = self;
         myCollectionView.backgroundColor = UIColor.white;
         
+        (myCollectionView as UIScrollView).delegate = self;
+        
         myCollectionView.frame = CGRect(x:0, y:90 + tabBarHeight, width:self.view.bounds.width, height:self.view.bounds.height - 100 - tabBarHeight);
         
         let bottomBorder = UIView();
@@ -74,15 +76,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         self.view.addSubview(bottomBorder);
     }
     
-    func doSearch(){
-        if myTextField.text == nil{
-            return;
-        }
-        var text: String = "https://scholar.google.co.jp/scholar?as_vis=1&hl=ja&as_sdt=0%2C5&q=filetype%3Apdf"
-        let name: String = myTextField.text!
+    func doSearch(keyword : String, page : Int){
+        var text: String = "https://scholar.google.co.jp/scholar?as_vis=1&start=\((page-1) * 10)&hl=ja&as_sdt=0%2C5&q=filetype%3Apdf"
+        let name: String = keyword;
         var arr = name.split(separator: " ")
         for i in 0..<arr.count {
-            text += "%20" + arr[i];
+            text += "%20" + arr[i].addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!;
         }
         print(text);
         
@@ -94,21 +93,27 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
                 print("Content-Type: \(response.allHeaderFields["Content-Type"] ?? "")");
                 print("statusCode: \(response.statusCode)");
                 let html = (String(data: data, encoding: String.Encoding.shiftJIS) ?? "");
-                self.makeRecordsList(html: html);
+                self.makeRecordsList(html: html, isFirst: page==1);
+            }else{
+                self.viewdPage -= 1;
             }
             
         };
         task.resume();
-        
-//        requestHTTPS.getAsync(downloadURL: text)
     }
     
     
     var recordList : [MyRecord] = [];
+    var lastViewd : Int = -1;
+    var viewdPage : Int = 0;
+    var searchKeyword : String? = nil;
     
-    func makeRecordsList(html: String){
+    func makeRecordsList(html: String, isFirst : Bool){
         print(html);
-        recordList.removeAll();
+        if(isFirst){
+            recordList.removeAll();
+            lastViewd = -1;
+        }
         var array1 = html.components(separatedBy: "関連記事");
         var i = 0;
         while true {
@@ -137,7 +142,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
 //            print(detail);
             print(pdfUrl);
             print("\n");
-            recordList.append(MyRecord(title_: title, pdfURL_: pdfUrl, text_: detail!));
+            recordList.append(MyRecord(title_: title, pdfURL_: pdfUrl, text_: detail!, row_: recordList.count));
             i+=1;
         }
         print(recordList.count);
@@ -145,6 +150,20 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
             self.myCollectionView.reloadData();
         }
 //        myCollectionView.reloadData();
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("\(lastViewd) , \(recordList.count)");
+//        if(lastViewd != recordList.count - 1){return;}
+        if(searchKeyword == nil){return;}
+        let visibles = myCollectionView.visibleCells;
+        var flag : Bool = false;
+        for i in 0..<visibles.count {
+            if((visibles[i] as! CustomUICollectionViewCell).row == recordList.count-1){flag = true;}
+        }
+        if(flag == false){return;}
+        viewdPage += 1;
+        doSearch(keyword: searchKeyword!, page: viewdPage);
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -168,11 +187,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         cell.setTitle(title: recordList[indexPath.row].title);
         cell.setDetail(detail: recordList[indexPath.row].detail);
         cell.resize();
+        cell.setRow(row_: recordList[indexPath.row].row);
         if(indexPath.row % 2 == 1){
             cell.setDarker();
         }else{
             cell.setLighter();
         }
+        lastViewd = indexPath.row;
         return cell;
     }
        
@@ -198,8 +219,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        if myTextField.text == nil{
+            return false;
+        }
+        searchKeyword = myTextField.text;
+        viewdPage = 1;
         textField.resignFirstResponder()
-        doSearch()
+        doSearch(keyword: myTextField.text!, page: 1)
         return true
     }
     

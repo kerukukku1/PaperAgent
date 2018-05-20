@@ -4,6 +4,7 @@ class CustomUICollectionViewCell : UICollectionViewCell{
     
     var titleLabel : UILabel?;
     var detailLabel : UILabel?;
+    var row : Int = -1;
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -17,6 +18,10 @@ class CustomUICollectionViewCell : UICollectionViewCell{
         detailLabel?.attributedText = detail;
         detailLabel?.numberOfLines = 0;
         detailLabel?.sizeToFit();
+    }
+    
+    func setRow(row_ : Int){
+        row = row_;
     }
     
     func resize(){

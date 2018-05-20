@@ -12,10 +12,12 @@ class MyRecord{
     var title : String;
     var pdfURL : String;
     var detail : NSAttributedString;
-    init(title_:String, pdfURL_:String, text_:NSAttributedString){
+    var row : Int;
+    init(title_:String, pdfURL_:String, text_:NSAttributedString, row_:Int){
         title = title_;
         pdfURL = pdfURL_;
         detail = text_;
+        row = row_;
     }
     
 }
