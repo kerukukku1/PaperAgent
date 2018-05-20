@@ -11,11 +11,11 @@ import Foundation
 class MyRecord{
     var title : String;
     var pdfURL : String;
-    var text : String;
-    init(title_:String, pdfURL_:String, text_:String){
+    var detail : NSAttributedString;
+    init(title_:String, pdfURL_:String, text_:NSAttributedString){
         title = title_;
         pdfURL = pdfURL_;
-        text = text_;
+        detail = text_;
     }
     
 }

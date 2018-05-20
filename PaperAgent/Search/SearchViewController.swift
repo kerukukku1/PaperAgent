@@ -47,7 +47,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         myTextField.clearButtonMode = .whileEditing
         
         let layout = UICollectionViewFlowLayout();
-        layout.itemSize = CGSize(width:self.view.bounds.width, height:170);
+        layout.itemSize = CGSize(width:self.view.bounds.width, height:180);
         layout.sectionInset = UIEdgeInsets.zero;
         layout.minimumLineSpacing = 0.0;
         layout.minimumInteritemSpacing = 0.0;
@@ -106,26 +106,36 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     func makeRecordsList(html: String){
         print(html);
         recordList.removeAll();
-        var array1 = html.components(separatedBy: ".pdf\"");
-        var i = 1;
+        var array1 = html.components(separatedBy: "関連記事");
+        var i = 0;
         while true {
-            if(i >= array1.count){
+            if(i >= array1.count - 1){
                 break;
             }
-            let pdfUrl = array1[i].components(separatedBy: "]</span></span> <a href=\"")[1] + ".pdf";
-            //print(pdfUrl);
-            let source = array1[i+1];
-            var title = source.components(separatedBy: "amp;nossl=1\">")[1].components(separatedBy: "</h3><div class=\"gs_a\">")[0];
+            let array2 = array1[i].components(separatedBy: "\" class=\"gs_or_mor\" role=\"");
+            let data = array2[array2.count - 1];
+            let array3 = data.components(separatedBy: ".pdf");
+            if(array3.count == 0 || array3.count == 1){i+=1;continue;}
+            let array4 = array3[0].components(separatedBy: "href=\"");
+            let pdfUrl = array4[array4.count - 1] + ".pdf";
+            print(pdfUrl);
+            let array5 = data.components(separatedBy: "amp;nossl=1\">");
+            var title = "";
+            if(array5.count == 2){
+                title = array5[1].components(separatedBy: "</h3><div class=\"gs_a\">")[0]
+            }else{
+                title = array5[2].components(separatedBy: "</h3><div class=\"gs_a\">")[0]
+            }
             title = title.replacingOccurrences(of: "<b>", with: "");
             title = title.replacingOccurrences(of: "</b>", with: "");
             title = title.replacingOccurrences(of: "</a>", with: "");
-            let detail = source.components(separatedBy: "</a></h3>")[1].components(separatedBy: "<div class=\"gs_fl\">")[0];
+            let detail = data.components(separatedBy: "</a></h3>")[1].components(separatedBy: "<div class=\"gs_fl\">")[0].htmlToAttributedString(family: "Helvetica", size: 10.0);
             print(title);
-            print(detail);
+//            print(detail);
             print(pdfUrl);
             print("\n");
-            recordList.append(MyRecord(title_: title, pdfURL_: pdfUrl, text_: detail));
-            i+=2;
+            recordList.append(MyRecord(title_: title, pdfURL_: pdfUrl, text_: detail!));
+            i+=1;
         }
         print(recordList.count);
         DispatchQueue.main.async {
@@ -143,10 +153,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         let cell : CustomUICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! CustomUICollectionViewCell;
         cell.layer.borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1).cgColor;
         cell.layer.borderWidth = 0.4;
-        cell.titleLabel?.text = recordList[indexPath.row].title;
-        cell.detailLabel?.attributedText = recordList[indexPath.row].text.htmlToAttributedString(family: "Helvetica", size: 8.0);
-        cell.detailLabel?.numberOfLines = 0;
-        cell.detailLabel?.sizeToFit();
+        cell.setTitle(title: recordList[indexPath.row].title);
+        cell.setDetail(detail: recordList[indexPath.row].detail);
+        cell.resize();
         if(indexPath.row % 2 == 1){
             cell.setDarker();
         }else{

@@ -8,6 +8,23 @@ class CustomUICollectionViewCell : UICollectionViewCell{
         super.init(coder: aDecoder)!
     }
     
+    func setTitle(title : String){
+        titleLabel?.text = title;
+        
+    }
+    
+    func setDetail(detail : NSAttributedString){
+        detailLabel?.attributedText = detail;
+        detailLabel?.numberOfLines = 0;
+        detailLabel?.sizeToFit();
+    }
+    
+    func resize(){
+//        let size = detailLabel?.sizeThatFits(CGSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude));
+//        self.frame = CGRect(x:4, y:4, width:self.frame.width - 4, height:(60 + (size?.height)!))
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -24,12 +41,16 @@ class CustomUICollectionViewCell : UICollectionViewCell{
         detailLabel?.text = "nil"
         detailLabel?.backgroundColor = UIColor.white
         detailLabel?.textAlignment = NSTextAlignment.left
-        detailLabel?.font = UIFont.systemFont(ofSize: 8.0)
+        detailLabel?.font = UIFont.systemFont(ofSize: 10.0)
         detailLabel?.numberOfLines = 0
         detailLabel?.lineBreakMode = NSLineBreakMode.byCharWrapping
 //        detailLabel?.backgroundColor = UIColor.black
 
         
+        titleLabel?.isOpaque = false;
+        detailLabel?.isOpaque = false;
+        titleLabel?.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0);
+        detailLabel?.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0);
         // Cellに追加.
         self.contentView.addSubview(titleLabel!)
         self.contentView.addSubview(detailLabel!)
@@ -37,14 +58,14 @@ class CustomUICollectionViewCell : UICollectionViewCell{
     
     func setDarker(){
         self.backgroundColor = UIColor(red: 245 / 255, green: 245 / 255, blue: 247 / 255, alpha: 1)
-        titleLabel?.backgroundColor = UIColor(red: 245 / 255, green: 245 / 255, blue: 247 / 255, alpha: 1)
-        detailLabel?.backgroundColor = UIColor(red: 245 / 255, green: 245 / 255, blue: 247 / 255, alpha: 1)
+//        titleLabel?.backgroundColor = UIColor(red: 245 / 255, green: 245 / 255, blue: 247 / 255, alpha: 1)
+//        detailLabel?.backgroundColor = UIColor(red: 245 / 255, green: 245 / 255, blue: 247 / 255, alpha: 1)
     }
     
     func setLighter(){
         self.backgroundColor = UIColor.white
-        titleLabel?.backgroundColor = UIColor.white
-        detailLabel?.backgroundColor = UIColor.white
+//        titleLabel?.backgroundColor = UIColor.white
+//        detailLabel?.backgroundColor = UIColor.white
     }
     
 }
