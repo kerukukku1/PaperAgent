@@ -27,10 +27,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
+        let tabBarController: UITabBarController = UITabBarController()
+        let tabBarHeight = tabBarController.tabBar.frame.size.height
+        
         let tWidth: CGFloat = 340
         let tHeight: CGFloat = 40
         let posX: CGFloat = (self.view.bounds.width - tWidth)/2
-        let posY: CGFloat = 34
+        let posY: CGFloat = 34 + tabBarHeight;
         
         myTextField = UITextField(frame: CGRect(x: posX, y: posY, width: tWidth, height: tHeight))
         
@@ -58,11 +61,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         myCollectionView.dataSource = self;
         myCollectionView.backgroundColor = UIColor.white;
         
-        myCollectionView.frame = CGRect(x:0, y:90, width:self.view.bounds.width, height:self.view.bounds.height - 100);
+        myCollectionView.frame = CGRect(x:0, y:90 + tabBarHeight, width:self.view.bounds.width, height:self.view.bounds.height - 100 - tabBarHeight);
         
         let bottomBorder = UIView();
         let borderWidth = CGFloat(2.0) // <- 線の太さ
-        bottomBorder.frame = CGRect(x:0, y:90, width:self.view.bounds.width, height:borderWidth)
+        bottomBorder.frame = CGRect(x:0, y:90 + tabBarHeight, width:self.view.bounds.width, height:borderWidth)
         bottomBorder.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1) // <- 線の色
         
         
@@ -144,6 +147,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
 //        myCollectionView.reloadData();
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let pdfURL : String = recordList[indexPath.row].pdfURL;
+        let vc = PDFViewer()
+        vc.setTargetURL(path: pdfURL)
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("CHECK! \(recordList.count)");
         return recordList.count;
@@ -162,6 +174,27 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
             cell.setLighter();
         }
         return cell;
+    }
+       
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! UICollectionViewCell
+        cell.backgroundColor = UIColor(red: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1);
+//        print("Dark \(indexPath.row)");
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+//        print("Light \(indexPath.row)");
+        UIView.animate(withDuration: 0.4) {
+            if let cell = collectionView.cellForItem(at: indexPath) as? CustomUICollectionViewCell {
+                if(indexPath.row % 2 == 1){
+                    cell.setDarker();
+//                    print("Darker");
+                }else{
+                    cell.setLighter();
+//                    print("Lighter");
+                }
+            }
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
