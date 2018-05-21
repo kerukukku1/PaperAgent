@@ -19,9 +19,9 @@
 		39A0D166207F6B26005F264B /* PaperAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D165207F6B26005F264B /* PaperAgentTests.swift */; };
 		39A0D171207F6B26005F264B /* PaperAgentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D170207F6B26005F264B /* PaperAgentUITests.swift */; };
 		39A0D181207F78A1005F264B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A0D180207F78A1005F264B /* SearchViewController.swift */; };
+		39D4DEC620842BF40000720C /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4DEC520842BF40000720C /* NextViewController.swift */; };
 		A027F26820B04139008675D2 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027F26720B04139008675D2 /* MyRecord.swift */; };
 		A027F26A20B04145008675D2 /* CustomUICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027F26920B04145008675D2 /* CustomUICollectionViewCell.swift */; };
-		39D4DEC620842BF40000720C /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4DEC520842BF40000720C /* NextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +60,9 @@
 		39A0D170207F6B26005F264B /* PaperAgentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperAgentUITests.swift; sourceTree = "<group>"; };
 		39A0D172207F6B26005F264B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A0D180207F78A1005F264B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		39D4DEC520842BF40000720C /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		A027F26720B04139008675D2 /* MyRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		A027F26920B04145008675D2 /* CustomUICollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUICollectionViewCell.swift; sourceTree = "<group>"; };
-		39D4DEC520842BF40000720C /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,7 +493,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM724GJ6XH;
 				INFOPLIST_FILE = PaperAgent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.primetheory.PaperAgent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -509,7 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM724GJ6XH;
 				INFOPLIST_FILE = PaperAgent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.primetheory.PaperAgent;
 				PRODUCT_NAME = "$(TARGET_NAME)";

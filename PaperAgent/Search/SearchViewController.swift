@@ -109,7 +109,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
     var searchKeyword : String? = nil;
     
     func makeRecordsList(html: String, isFirst : Bool){
-        print(html);
+//        print(html);
         if(isFirst){
             recordList.removeAll();
             lastViewd = -1;
@@ -138,9 +138,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
             title = title.replacingOccurrences(of: "</b>", with: "");
             title = title.replacingOccurrences(of: "</a>", with: "");
             let detail = data.components(separatedBy: "</a></h3>")[1].components(separatedBy: "<div class=\"gs_fl\">")[0].htmlToAttributedString(family: "Helvetica", size: 10.0);
-            print(title);
+//            print(title);
 //            print(detail);
-            print(pdfUrl);
+//            print(pdfUrl);
             print("\n");
             recordList.append(MyRecord(title_: title, pdfURL_: pdfUrl, text_: detail!, row_: recordList.count));
             i+=1;
@@ -170,6 +170,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UICollectionV
         let pdfURL : String = recordList[indexPath.row].pdfURL;
         let vc = PDFViewer()
         vc.setTargetURL(path: pdfURL)
+        print(pdfURL);
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
